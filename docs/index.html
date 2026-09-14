@@ -1,0 +1,42 @@
+---
+layout: default
+title: 最新一回
+---
+{% assign latest = site.posts.first %}
+<section class="home-hero">
+  <div class="home-hero__kicker">一日一回 · 以今日写史</div>
+  <h1>正在发生的<br>世界史</h1>
+  <p>把每天散落在世界各处的消息，写成一部还没有结局的长篇连载。</p>
+  <div class="home-hero__rule" aria-hidden="true"></div>
+</section>
+
+{% if latest %}
+<section class="latest-wrap">
+  <div class="section-label">今日新章</div>
+  <article class="latest-episode">
+    <div class="latest-episode__number">第 {{ latest.episode }} 回</div>
+    <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
+    <p class="latest-episode__summary">{{ latest.summary }}</p>
+    <div class="latest-episode__excerpt">{{ latest.excerpt | strip_html | truncate: 180 }}</div>
+    <a class="read-link" href="{{ latest.url | relative_url }}">开卷读这一回 <span aria-hidden="true">→</span></a>
+  </article>
+</section>
+{% endif %}
+
+<section class="recent-wrap">
+  <div class="section-heading">
+    <div class="section-label">近来回目</div>
+    <a href="{{ '/archive/' | relative_url }}">查看全部</a>
+  </div>
+  <ol class="episode-list">
+    {% for post in site.posts limit: 8 %}
+    <li>
+      <a href="{{ post.url | relative_url }}">
+        <span class="episode-list__number">{{ post.episode | prepend: '000' | slice: -3, 3 }}</span>
+        <span class="episode-list__title">{{ post.title }}</span>
+        <time>{{ post.date | date: "%m.%d" }}</time>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>

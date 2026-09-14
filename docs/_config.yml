@@ -1,0 +1,14 @@
+title: 正在发生的世界史
+description: 以章回与评书的方式，记录每天正在发生的世界。
+lang: zh-CN
+timezone: Asia/Shanghai
+url: https://trojanbox.github.io
+baseurl: /world-history-in-progress
+permalink: pretty
+excerpt_separator: "<!--more-->"
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+exclude:
+  - README.md

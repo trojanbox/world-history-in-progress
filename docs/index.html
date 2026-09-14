@@ -1,42 +1,32 @@
 ---
 layout: default
-title: 最新一回
+title: 首页
 ---
 {% assign latest = site.posts.first %}
-<section class="home-hero">
-  <div class="home-hero__kicker">一日一回 · 以今日写史</div>
-  <h1>正在发生的<br>世界史</h1>
-  <p>把每天散落在世界各处的消息，写成一部还没有结局的长篇连载。</p>
-  <div class="home-hero__rule" aria-hidden="true"></div>
-</section>
+<section class="book-home">
+  <div class="book-home__inner">
+    <div class="book-home__eyebrow">ONGOING NOVEL · 持续连载</div>
+    <h1>正在发生的<br>世界史</h1>
+    <p class="book-home__lead">一部跟着现实时间向前生长的长篇小说。</p>
 
-{% if latest %}
-<section class="latest-wrap">
-  <div class="section-label">今日新章</div>
-  <article class="latest-episode">
-    <div class="latest-episode__number">第 {{ latest.episode }} 回</div>
-    <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-    <p class="latest-episode__summary">{{ latest.summary }}</p>
-    <div class="latest-episode__excerpt">{{ latest.excerpt | strip_html | truncate: 180 }}</div>
-    <a class="read-link" href="{{ latest.url | relative_url }}">开卷读这一回 <span aria-hidden="true">→</span></a>
-  </article>
-</section>
-{% endif %}
+    <div class="book-home__description">
+      <p>每天，世界都会同时发生很多事情。战争、谈判、利率、能源、选举、科技和普通人的生活，看起来彼此遥远，却不断在同一张因果网络里互相推动。</p>
+      <p>这部书从现实世界真正发生的事件出发，用长篇小说的方式把它们重新连成一条能够持续阅读的故事线。没有预先写好的结局，也没有站在未来回看今天的全知视角——我们和书里的人一样，只能随着时间继续往前走。</p>
+    </div>
 
-<section class="recent-wrap">
-  <div class="section-heading">
-    <div class="section-label">近来回目</div>
-    <a href="{{ '/archive/' | relative_url }}">查看全部</a>
-  </div>
-  <ol class="episode-list">
-    {% for post in site.posts limit: 8 %}
-    <li>
-      <a href="{{ post.url | relative_url }}">
-        <span class="episode-list__number">{{ post.episode | prepend: '000' | slice: -3, 3 }}</span>
-        <span class="episode-list__title">{{ post.title }}</span>
-        <time>{{ post.date | date: "%m.%d" }}</time>
+    <div class="book-home__actions">
+      {% if latest %}
+      <a class="book-home__primary" href="{{ latest.url | relative_url }}">
+        <span>开始阅读</span>
+        <small>第 {{ latest.chapter }} 章 · {{ latest.title }}</small>
       </a>
-    </li>
-    {% endfor %}
-  </ol>
+      {% endif %}
+      <a class="book-home__secondary" href="{{ '/chapters/' | relative_url }}">全部章节</a>
+    </div>
+
+    <div class="book-home__meta">
+      <span>2026 年 9 月开始连载</span>
+      <span>现实事件驱动 · 每日更新</span>
+    </div>
+  </div>
 </section>

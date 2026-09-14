@@ -1,0 +1,24 @@
+---
+layout: default
+title: 章节
+permalink: /chapters/
+---
+<section class="chapters-page">
+  <header class="chapters-header">
+    <span>CONTENTS</span>
+    <h1>章节</h1>
+    <p>从最新一章向前阅读，或从故事开始的地方重新进入。</p>
+  </header>
+
+  <ol class="chapter-list">
+    {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url | relative_url }}">
+        <span class="chapter-list__number">第 {{ post.chapter }} 章</span>
+        <strong>{{ post.title }}</strong>
+        <time>{{ post.date | date: "%Y.%m.%d" }}</time>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>

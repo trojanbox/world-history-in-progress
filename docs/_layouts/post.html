@@ -1,28 +1,24 @@
 ---
 layout: default
 ---
-<article class="article-shell">
-  <header class="article-header">
-    <a class="eyebrow" href="{{ '/archive/' | relative_url }}">正在发生的世界史 · 第 {{ page.episode }} 回</a>
+<article class="reader-shell">
+  <header class="reader-article-header">
+    <div class="reader-article-header__chapter">第 {{ page.chapter }} 章</div>
     <h1>{{ page.title }}</h1>
-    {% if page.summary %}<p class="article-summary">{{ page.summary }}</p>{% endif %}
-    <div class="article-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
-      <span aria-hidden="true">·</span>
-      <span>当日世界纪事</span>
-    </div>
+    {% if page.summary %}<p class="reader-article-header__summary">{{ page.summary }}</p>{% endif %}
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
   </header>
 
-  <div class="article-body">
+  <div class="reader-content" id="reader-content">
     {{ content }}
   </div>
 
-  <nav class="article-nav" aria-label="前后回导航">
+  <nav class="reader-chapter-nav" aria-label="前后章节导航">
     {% if page.previous %}
-      <a href="{{ page.previous.url | relative_url }}"><span>上一回</span><strong>{{ page.previous.title }}</strong></a>
+      <a href="{{ page.previous.url | relative_url }}"><span>上一章</span><strong>{{ page.previous.title }}</strong></a>
     {% else %}<span></span>{% endif %}
     {% if page.next %}
-      <a class="article-nav__next" href="{{ page.next.url | relative_url }}"><span>下一回</span><strong>{{ page.next.title }}</strong></a>
+      <a class="reader-chapter-nav__next" href="{{ page.next.url | relative_url }}"><span>下一章</span><strong>{{ page.next.title }}</strong></a>
     {% endif %}
   </nav>
 </article>

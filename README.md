@@ -1,16 +1,16 @@
 # 《正在发生的世界史》
 
-一个按日连载的世界时事叙事项目。
+一部跟着现实时间持续生长的长篇叙事连载。
 
-它尝试用更接近评书、章回体网文的方式，把当天正在发生的国际事件串成一回容易读下去的故事：每天一回，每回有回目、有定场诗，正文尽量让没有时间持续追踪国际新闻的人也能读懂。
+故事从真实世界每天发生的政治、战争、经济、科技与社会变化出发，把原本散落在新闻里的事件重新放进同一条时间线中。内容采用长篇小说式叙事，但现实人物、机构、日期、数字与事件关系仍以可核验事实为边界。
 
 ## 在线阅读
 
-GitHub Pages 启用后：`https://trojanbox.github.io/world-history-in-progress/`
+https://trojanbox.github.io/world-history-in-progress/
 
-## 发布一回
+## 发布一章
 
-正文位于 `docs/_posts/`。每天新增一个 Markdown 文件即可：
+正文位于 `docs/_posts/`。每天新增一个 Markdown 文件：
 
 ```text
 docs/_posts/YYYY-MM-DD-NNN.md
@@ -22,30 +22,33 @@ docs/_posts/YYYY-MM-DD-NNN.md
 docs/_posts/2026-09-15-001.md
 ```
 
-文章头部使用：
+文章头部：
 
 ```yaml
 ---
 layout: post
-title: "第一回 ……"
-episode: 1
+title: "章节标题"
+chapter: 1
 date: 2026-09-15 21:00:00 +0800
-summary: "一句话概括这一回发生了什么。"
-permalink: /episodes/001/
+summary: "一句话概括本章。"
+permalink: /chapters/001/
 ---
 ```
 
-正文第一段建议用引用块写定场诗，随后进入正文。
+正文直接进入叙事，不要求固定的定场诗或章回体开场。
 
 ## 目录
 
-- `docs/_posts/`：每日正文
-- `docs/_layouts/`：站点页面骨架
-- `docs/assets/`：样式
-- `docs/index.html`：首页
-- `docs/archive.html`：完整回目
-- `docs/about.md`：项目说明
+- `docs/_posts/`：每日章节
+- `docs/_layouts/`：页面与阅读器骨架
+- `docs/assets/`：样式和阅读器脚本
+- `docs/index.html`：作品首页
+- `docs/chapters.html`：完整章节列表
 - `AGENTS.md`：给后续 AI/自动化使用的写作与发布约束
+
+## 阅读器
+
+章节页支持字体、字号、行距、正文宽度和页面模式设置。偏好保存在浏览器本地，不依赖账号或服务端。
 
 ## 本地预览
 

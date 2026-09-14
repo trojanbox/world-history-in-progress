@@ -3,36 +3,112 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4efe5">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f5">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.summary | default: site.description | escape }}">
+  <script>
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('world-history-reader-v1') || '{}');
+        if (saved.theme) document.documentElement.dataset.readerTheme = saved.theme;
+        if (saved.font) document.documentElement.dataset.readerFont = saved.font;
+        if (saved.spacing) document.documentElement.dataset.readerSpacing = saved.spacing;
+        if (saved.width) document.documentElement.dataset.readerWidth = saved.width;
+        if (saved.size) document.documentElement.style.setProperty('--reader-font-size', saved.size + 'px');
+      } catch (_) {}
+    }());
+  </script>
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+  <script defer src="{{ '/assets/reader.js' | relative_url }}"></script>
 </head>
-<body>
+<body class="{% if page.layout == 'post' %}reader-page{% else %}site-page{% endif %}">
+  {% if page.layout == 'post' %}
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  <header class="reader-header">
+    <a class="reader-header__brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <div class="reader-header__chapter">第 {{ page.chapter }} 章</div>
+    <div class="reader-header__actions">
+      <a href="{{ '/chapters/' | relative_url }}">章节</a>
+      <button type="button" id="reader-settings-open" aria-controls="reader-settings" aria-expanded="false">阅读设置</button>
+    </div>
+  </header>
+  {% else %}
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-brand" href="{{ '/' | relative_url }}">
-        <span class="site-brand__seal">史</span>
-        <span class="site-brand__text">
-          <strong>{{ site.title }}</strong>
-          <small>THE HISTORY HAPPENING NOW</small>
-        </span>
-      </a>
+      <a class="site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
       <nav class="site-nav" aria-label="主导航">
-        <a href="{{ '/' | relative_url }}">最新</a>
-        <a href="{{ '/archive/' | relative_url }}">回目</a>
-        <a href="{{ '/about/' | relative_url }}">缘起</a>
+        <a href="{{ '/chapters/' | relative_url }}">章节</a>
       </nav>
     </div>
   </header>
+  {% endif %}
 
   <main>{{ content }}</main>
 
+  {% if page.layout == 'post' %}
+  <div class="reader-settings-overlay" id="reader-settings-overlay" aria-hidden="true"></div>
+  <aside class="reader-settings" id="reader-settings" aria-hidden="true" aria-label="阅读设置">
+    <div class="reader-settings__header">
+      <strong>阅读设置</strong>
+      <button type="button" id="reader-settings-close" aria-label="关闭阅读设置">关闭</button>
+    </div>
+
+    <section class="reader-setting-group">
+      <span class="reader-setting-group__label">页面模式</span>
+      <div class="reader-option-grid reader-option-grid--four">
+        <button type="button" data-reader-theme="system">系统</button>
+        <button type="button" data-reader-theme="light">明亮</button>
+        <button type="button" data-reader-theme="sepia">护眼</button>
+        <button type="button" data-reader-theme="dark">深色</button>
+      </div>
+    </section>
+
+    <section class="reader-setting-group">
+      <span class="reader-setting-group__label">字体</span>
+      <div class="reader-option-grid">
+        <button type="button" data-reader-font="serif">宋体</button>
+        <button type="button" data-reader-font="sans">黑体</button>
+        <button type="button" data-reader-font="system">系统</button>
+      </div>
+    </section>
+
+    <section class="reader-setting-group">
+      <span class="reader-setting-group__label">字号</span>
+      <div class="reader-stepper">
+        <button type="button" id="reader-font-minus" aria-label="减小字号">−</button>
+        <output id="reader-font-size">19px</output>
+        <button type="button" id="reader-font-plus" aria-label="增大字号">＋</button>
+      </div>
+    </section>
+
+    <section class="reader-setting-group">
+      <span class="reader-setting-group__label">行距</span>
+      <div class="reader-option-grid">
+        <button type="button" data-reader-spacing="compact">紧凑</button>
+        <button type="button" data-reader-spacing="comfortable">舒展</button>
+        <button type="button" data-reader-spacing="loose">宽松</button>
+      </div>
+    </section>
+
+    <section class="reader-setting-group">
+      <span class="reader-setting-group__label">正文宽度</span>
+      <div class="reader-option-grid">
+        <button type="button" data-reader-width="narrow">窄</button>
+        <button type="button" data-reader-width="standard">标准</button>
+        <button type="button" data-reader-width="wide">宽</button>
+      </div>
+    </section>
+
+    <button class="reader-reset" type="button" id="reader-reset">恢复默认</button>
+  </aside>
+  {% else %}
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>世界正在发生，书也就一直写下去。</p>
-      <p class="site-footer__meta">《正在发生的世界史》 · GitHub Pages</p>
+      <span>《正在发生的世界史》</span>
+      <span>持续连载</span>
     </div>
   </footer>
+  {% endif %}
 </body>
 </html>
